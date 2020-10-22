@@ -39,3 +39,5 @@ Then show table `data` using `\d`
 INSERT INTO student(first_name, last_name, gender, date, email)
 VALUES('mbr', 'sagor', 'yes', date '2020-10-10', 'mbrsagor@gmail.com');
 ```
+###### How to Query data from the table?
+`SELECT * FROM table_name;`
