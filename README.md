@@ -27,7 +27,7 @@ date DATE);
 ```
 Then show table `data` using `\d`
 
-###### Descripte table.
+###### List of relations in table.
 ` \d table_name;`
 `\dt`
 
@@ -41,3 +41,6 @@ VALUES('mbr', 'sagor', 'yes', date '2020-10-10', 'mbrsagor@gmail.com');
 ```
 ###### How to Query data from the table?
 `SELECT * FROM table_name;`
+
+###### Select from `WHERE`.
+`SELECT FROM table_name WHERE table_field='value'; `
