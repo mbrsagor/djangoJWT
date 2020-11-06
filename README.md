@@ -15,6 +15,9 @@
 ###### Drop database.
 `DROP DATABASE db_name;`
 
+###### Drop database user.
+`drop user user_name;`
+
 ###### How to create table?
 ```
 CREATE TABLE student (
