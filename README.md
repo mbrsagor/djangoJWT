@@ -25,3 +25,20 @@ source venv/bin/activate
 ```
 
 N:B: Must be you have to change database name, username etc, otherwise you will got an error.
+#### Example:
+- Goto config folder
+ - db_config.py change on your database user
+- Follow the instruction
+
+```python
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'your_db_name',
+        'USER': 'db_user',
+        'PASSWORD': 'db_user_password',
+        'HOST': 'localhost', # IP
+        'PORT': '', # Port if available
+    }
+}
+```
