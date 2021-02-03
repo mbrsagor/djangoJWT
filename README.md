@@ -1,4 +1,4 @@
-# djangoJWT
+# Django-JWT App
 > Django JWT authentication system in backend development.
 
 ### Dependencies:
