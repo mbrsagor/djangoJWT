@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'users',
 
     # 3rd party app
-    'rest_framework'
+    'rest_framework',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -110,10 +111,13 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+# Custom user
+AUTH_USER_MODEL = 'users.User'
+
 # REST FRAMEWORK SETTINGS
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        'rest_framework.permissions.IsAuthenticated',
     ),
 }
 
@@ -124,3 +128,8 @@ JWT_AUTH = {
     'JWT_EXPIRATION_DELTA': datetime.timedelta(seconds=3000),
     'JWT_AUTH_HEADER_PREFIX': 'Bearer',
 }
+
+CORS_ALLOW_CREDENTIALS = True  # to accept cookies via ajax request
+CORS_ORIGIN_WHITELIST = [
+    'http://localhost:3000'  # the domain for front-end app(you can add more than 1)
+]

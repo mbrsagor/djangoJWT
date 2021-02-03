@@ -1,7 +1,7 @@
 # Django-JWT App
 > Django JWT authentication system in backend development.
 
-### Dependencies:
+### Prerequisites:
 - python3.9
 - Django 3.1.6
 - psql (PostgreSQL) 12.5
