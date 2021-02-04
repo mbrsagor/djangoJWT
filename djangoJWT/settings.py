@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 from config.db_config import DATABASES
-import datetime
+from datetime import timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -43,6 +43,7 @@ INSTALLED_APPS = [
 
     # 3rd party app
     'rest_framework',
+    'rest_framework.authtoken',
     'corsheaders',
 ]
 
@@ -118,15 +119,9 @@ AUTH_USER_MODEL = 'users.User'
 
 # REST FRAMEWORK SETTINGS
 REST_FRAMEWORK = {
-    'DEFAULT_RENDERER_CLASSES': [
-        'rest_framework.renderers.JSONRenderer',
-    ],
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-    ),
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
-    ],
+    )
 }
 
 CORS_ALLOW_CREDENTIALS = True  # to accept cookies via ajax request
