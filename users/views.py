@@ -5,7 +5,7 @@ from rest_framework.permissions import AllowAny
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.contrib.auth import get_user_model
 
-from .utils import generate_access_token, generate_refresh_token
+from .utils import generate_access_token
 from .serializers import UserSerializer
 
 
@@ -36,8 +36,6 @@ def login_view(request):
 
     serialized_user = UserSerializer(user).data
     access_token = generate_access_token(user)
-    # refresh_token = generate_refresh_token(user)
-    # response.set_cookie(key='refreshtoken', value=refresh_token, httponly=True)
     response.data = {
         'access_token': access_token,
         'user': serialized_user,
