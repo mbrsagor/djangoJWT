@@ -3,7 +3,7 @@ from rest_framework.routers import DefaultRouter
 from .views import profile, login_view, ContactViewSet
 
 router = DefaultRouter()
-router.register('contact-list', ContactViewSet)
+router.register('contact', ContactViewSet)
 
 urlpatterns = [
     path('auth/login/', login_view, name="login"),
