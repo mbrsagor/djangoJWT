@@ -1,23 +1,15 @@
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework import exceptions
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.contrib.auth import get_user_model
 from rest_framework.viewsets import ModelViewSet
-from rest_framework.permissions import IsAuthenticated
 
 from .models import Contact
 from .serializers import ContactSerializer
 from .utils import generate_access_token
 from .serializers import UserSerializer
-
-
-@api_view(['GET'])
-def profile(request):
-    user = request.user
-    user_serializer = UserSerializer(user).data
-    return Response({"user": user_serializer})
 
 
 @api_view(['POST'])
