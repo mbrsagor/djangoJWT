@@ -4,9 +4,11 @@ from rest_framework import exceptions
 from rest_framework.permissions import AllowAny
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.contrib.auth import get_user_model
-from rest_framework_jwt import views as jwt_views
-from rest_framework import status
+from rest_framework.viewsets import ModelViewSet
+from rest_framework.permissions import IsAuthenticated
 
+from .models import Contact
+from .serializers import ContactSerializer
 from .utils import generate_access_token
 from .serializers import UserSerializer
 
@@ -43,3 +45,9 @@ def login_view(request):
         'user': serialized_user,
     }
     return response
+
+
+class ContactViewSet(ModelViewSet):
+    queryset = Contact.objects.all()
+    serializer_class = ContactSerializer
+    permission_classes = (IsAuthenticated,)
