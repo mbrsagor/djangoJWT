@@ -1,42 +1,14 @@
-from rest_framework.decorators import api_view, permission_classes
-from rest_framework.response import Response
-from rest_framework import exceptions
-from rest_framework.permissions import AllowAny, IsAuthenticated
-from django.views.decorators.csrf import ensure_csrf_cookie
-from django.contrib.auth import get_user_model
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
 
+from rest_framework_simplejwt.views import TokenObtainPairView
+
 from .models import Contact
-from .serializers import ContactSerializer
-from .utils import generate_access_token
-from .serializers import UserSerializer
+from .serializers import ContactSerializer, CustomTokenObtainPairSerializer
 
 
-@api_view(['POST'])
-@permission_classes([AllowAny])
-@ensure_csrf_cookie
-def login_view(request):
-    User = get_user_model()
-    username = request.data.get('username')
-    password = request.data.get('password')
-    response = Response()
-    if (username is None) or (password is None):
-        raise exceptions.AuthenticationFailed(
-            'username and password required')
-
-    user = User.objects.filter(username=username).first()
-    if user is None:
-        raise exceptions.AuthenticationFailed('user not found')
-    if not user.check_password(password):
-        raise exceptions.AuthenticationFailed('wrong password')
-
-    serialized_user = UserSerializer(user).data
-    access_token = generate_access_token(user)
-    response.data = {
-        'access_token': access_token,
-        'user': serialized_user,
-    }
-    return response
+class MyTokenObtainPairView(TokenObtainPairView):
+    serializer_class = CustomTokenObtainPairSerializer
 
 
 class ContactViewSet(ModelViewSet):
