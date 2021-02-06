@@ -123,10 +123,6 @@ REST_FRAMEWORK = {
     )
 }
 
-JWT_AUTH = {
-    'JWT_RESPONSE_PAYLOAD_HANDLER': 'users.functions.custom_jwt_response',
-}
-
 CORS_ALLOW_CREDENTIALS = True  # to accept cookies via ajax request
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000'  # the domain for front-end app(you can add more than 1)
