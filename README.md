@@ -6,7 +6,7 @@
 - Django 3.1.6
 - psql (PostgreSQL) 12.5
 
-The following steps will walk you thru installation on a Mac. I think Linux should be similar. It's also possible to develop on a Windows machine, but I have not documented the steps. If you've developed the `Django` app on Windows, you should have little problem getting up and running.
+The following steps will walk you thru installation on a Mac. I think Linux should be similar, It's also possible to develop on a Windows machine, but I have not documented the steps. If you've developed the `Django` app on Windows, you should have little problem getting up and running.
 
 ###### If psql error raise please follow the command.
 ```base 
