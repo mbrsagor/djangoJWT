@@ -47,11 +47,8 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
         user = User.objects.create_user(
             username=validated_data['username'],
             email=validated_data['email'],
-            phone_number=validated_data['phone_number'],
             first_name=validated_data['first_name'],
             last_name=validated_data['last_name'],
-            partner_name=validated_data['partner_name'],
-            select_brand=validated_data['select_brand'],
             password=validated_data['password']
         )
 
@@ -60,8 +57,7 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = [
-            'id', 'tokens', 'username', 'email', 'phone_number', 'first_name', 'last_name',
-            'password'
+            'id', 'tokens', 'username', 'email', 'first_name', 'last_name', 'password'
         ]
 
     # When user registration automatically `refresh` and `access token return`
