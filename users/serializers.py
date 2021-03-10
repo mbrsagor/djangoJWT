@@ -1,7 +1,7 @@
 import datetime
 from rest_framework import serializers
 from .models import User, Contact
-
+from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.utils import datetime_to_epoch
 
@@ -36,3 +36,41 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
         if user:
             token.payload['exp'] = datetime_to_epoch(token.current_time + SUPERUSER_LIFETIME)
             return token
+
+
+# Custom user registration
+class UserRegistrationSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(write_only=True)
+    tokens = serializers.SerializerMethodField()
+
+    def create(self, validated_data):
+        user = User.objects.create_user(
+            username=validated_data['username'],
+            email=validated_data['email'],
+            phone_number=validated_data['phone_number'],
+            first_name=validated_data['first_name'],
+            last_name=validated_data['last_name'],
+            partner_name=validated_data['partner_name'],
+            select_brand=validated_data['select_brand'],
+            password=validated_data['password']
+        )
+
+        return user
+
+    class Meta:
+        model = User
+        fields = [
+            'id', 'tokens', 'username', 'email', 'phone_number', 'first_name', 'last_name',
+            'password'
+        ]
+
+    # When user registration automatically `refresh` and `access token return`
+    def get_tokens(self, user):
+        tokens = RefreshToken.for_user(user)
+        refresh = str(tokens)
+        access = str(tokens.access_token)
+        data = {
+            "refresh": refresh,
+            "access": access
+        }
+        return data
