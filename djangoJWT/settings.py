@@ -54,6 +54,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'djangoJWT.urls'
@@ -116,14 +117,20 @@ STATIC_URL = '/static/'
 # Custom user
 AUTH_USER_MODEL = 'users.User'
 
-# REST FRAMEWORK SETTINGS
+# Rest Framework Settings
 REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-    )
+    ),
+    'DATETIME_FORMAT': '%Y-%m-%d %I:%M %p ',
 }
 
 CORS_ALLOW_CREDENTIALS = True  # to accept cookies via ajax request
-CORS_ORIGIN_WHITELIST = [
-    'http://localhost:3000'  # the domain for front-end app(you can add more than 1)
+# the domain for front-end app(you can add more than 1)
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "http://127.0.0.1:8000"
 ]
