@@ -5,7 +5,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.utils import datetime_to_epoch
 
-SUPERUSER_LIFETIME = datetime.timedelta(minutes=30)
+SUPERUSER_LIFETIME = datetime.timedelta(minutes=90)
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -61,6 +61,10 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
         ]
 
     # When user registration automatically `refresh` and `access token return`
+    """
+    :param access_token:
+     :return:
+    """
     def get_tokens(self, user):
         tokens = RefreshToken.for_user(user)
         refresh = str(tokens)
