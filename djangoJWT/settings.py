@@ -130,6 +130,7 @@ REST_FRAMEWORK = {
 
 CORS_ALLOW_CREDENTIALS = True  # to accept cookies via ajax request
 # the domain for front-end app(you can add more than 1)
+
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:8000"
@@ -143,3 +144,13 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
 }
 
+
+# SMTP Connfiguration
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'mail.sagor.me'
+EMAIL_HOST_USER = 'sagor@domain.com'
+EMAIL_HOST_PASSWORD = 'abcdef'
+DEFAULT_FROM_EMAIL = 'sagor@domain.com'
+SERVER_EMAIL = 'sagor@domain.com'
+EMAIL_PORT = 25
+EMAIL_USE_TLS = False
