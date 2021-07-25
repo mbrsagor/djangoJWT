@@ -2,7 +2,7 @@
 > Django JWT authentication system in backend development.
 
 ### Prerequisites:
-- python 3.9
+- python 3.8
 - Django 3.1.6
 - psql (PostgreSQL) 12.5
 
@@ -52,3 +52,11 @@ EMAIL_PORT=25
 EMAIL_USE_TLS=False
 ```
 N:B: Must be you have to change database name, username etc, otherwise you will got an error.
+
+###### If you want to run the project `docker` pls follow the instructions below:
+
+```based
+docker-compose up -d --build
+docker-compose exec web python manage.py migrate
+docker-compose exec web python manage.py createsuperuser
+```
