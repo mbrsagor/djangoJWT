@@ -17,28 +17,38 @@ If you contribute anything 1st setup and run the project in your local developme
 ```base
 git clone https://github.com/mbrsagor/djangoJWT.git
 cd djangoJWT
-virtualenv venv --python=python3.9
+virtualenv venv --python=python3.8
 source venv/bin/activate
+```
+
+Then copy `.sample.env` and make `.env` file then paste the all codes:
+
+```base
 ./manage.py migrate
 ./manage.py createsuperuser
 ./manage.py runserver
 ```
 
-N:B: Must be you have to change database name, username etc, otherwise you will got an error.
-#### Example:
-- Goto config folder
- - db_config.py change on your database user
-- Follow the instruction
+#### Example `.env` files:
 
-```python
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'your_db_name',
-        'USER': 'db_user',
-        'PASSWORD': 'db_user_password',
-        'HOST': 'localhost', # IP
-        'PORT': '', # Port if available
-    }
-}
+```.env
+SECRET_KEY=SECRET_KEY
+DEBUG=True
+ALLOWED_HOSTS=*
+
+# for localhost use
+DB_HOST=localhost
+DB_PORT=5432
+DB_NAME=db_name
+DB_USERNAME=db_user
+DB_PASSWORD=db_password
+
+EMAIL_HOST='mail.domain.com'
+EMAIL_HOST_USER='abc@domain.com'
+EMAIL_HOST_PASSWORD='abcdef'
+DEFAULT_FROM_EMAIL='abc@domain.com'
+SERVER_EMAIL='abc@domain.com'
+EMAIL_PORT=25
+EMAIL_USE_TLS=False
 ```
+N:B: Must be you have to change database name, username etc, otherwise you will got an error.
