@@ -1,19 +1,15 @@
-# Dockerfile
+#base image
+FROM python:3.8.6-slim-buster
 
-# Pull base image
-FROM python:3.8
-
-# Set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-# Set work directory
-WORKDIR /code
+# working directory
+WORKDIR /app
 
-# Install dependencies
-RUN pip install -r requirements.txt
-#COPY Pipfile Pipfile.lock /code/
-#RUN pipenv install --system
-
-# Copy project
-COPY . /code/
+##copy requirements
+COPY requirements.txt /tmp/requirements.txt
+#install requirements
+RUN pip install -r /tmp/requirements.txt
+#copy everythings
+COPY . .
