@@ -1,6 +1,6 @@
 import datetime
 from rest_framework import serializers
-from .models import User, Contact
+from .models import User, Contact, Note
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.utils import datetime_to_epoch
@@ -21,6 +21,21 @@ class ContactSerializer(serializers.ModelSerializer):
         fields = (
             'id', 'contact_name', 'contact_number'
         )
+
+
+class NoteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Note
+        fields = [
+            'id',
+            'user',
+            'title',
+            'description',
+            'is_private',
+            'created_date',
+            'updated_at'
+        ]
+        read_only_field = ('user',)
 
 
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
@@ -65,6 +80,7 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
     :param access_token:
      :return:
     """
+
     def get_tokens(self, user):
         tokens = RefreshToken.for_user(user)
         refresh = str(tokens)

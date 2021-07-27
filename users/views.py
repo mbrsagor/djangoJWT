@@ -6,8 +6,8 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 
 from django.contrib.auth.models import User
 
-from .models import Contact
-from .serializers import ContactSerializer, CustomTokenObtainPairSerializer, UserRegistrationSerializer
+from .models import Contact, Note
+from .serializers import ContactSerializer, CustomTokenObtainPairSerializer, UserRegistrationSerializer, NoteSerializer
 
 
 class MyTokenObtainPairView(TokenObtainPairView):
