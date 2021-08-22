@@ -1,32 +1,29 @@
 version: "3"
-
 services:
   db:
-    container_name: auth_db
-    image: postgres:12.3
-    restart: always
+    container_name: auth # Here, container name means your DB name
+    image: postgres:13
     volumes:
-      - postgres_data:/var/lib/postgresql/data
-    env_file: ./.env.docker
-
-  web:
-    container_name: djangoJWT
-    build: .
+      - auth:/var/lib/postgresql/data
     restart: always
-    command: gunicorn project.wsgi:application --bind 0.0.0.0:8000
-    expose:
-      - 8000
-    volumes:
-      - media_data:/app/media
-      - static_data:/app/static
-    env_file:
-      - .env
-    depends_on:
-      - db
-    links:
-      - db:db
-
+    environment:
+      - POSTGRES_USER=mbr-sagor
+      - POSTGRES_PASSWORD=123456
+      - POSTGRES_DB=auth
+    ports:
+      - 5433:5432
+  container_name: djangoJWT
+  build: ./app
+  command: >
+    sh -c "python manage.py collectstatic --noinput &&
+           python manage.py migrate &&
+           python manage.py runserver 0.0.0.0:8000"
+  volumes:
+    :/app/
+  ports:
+    - 8000:8000
+  depends_on:
+    - db
 volumes:
-  media_data:
-  static_data:
-  postgres_data:
+  auth:
+    driver: local
