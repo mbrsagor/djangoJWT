@@ -55,8 +55,27 @@ N:B: Must be you have to change database name, username etc, otherwise you will 
 
 ###### If you want to run the project `docker` pls follow the instructions below:
 
-```based
+
+## Up and Run
+
+ - Docker Build
+```sh
 docker-compose up -d --build
-docker-compose exec web python manage.py migrate
-docker-compose exec web python manage.py createsuperuser
+```
+- Lets Browse [http://0.0.0.0:8080](http://0.0.0.0:8080)
+- Migration
+```sh
+docker-compose exec server python manage.py migrate --noinput
+```
+- Collect Statics 
+```sh
+docker-compose exec server python manage.py collectstatic --no-input --clear
+```
+- Check Logs
+```sh
+docker-compose logs -f
+``` 
+- Container down
+```sh
+docker-compose down
 ```
