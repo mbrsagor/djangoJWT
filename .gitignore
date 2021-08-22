@@ -8,3 +8,4 @@ media
 
 # misc
 .env
+.env.docker

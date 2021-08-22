@@ -79,3 +79,7 @@ docker-compose logs -f
 ```sh
 docker-compose down
 ```
+- docker cache clear
+```sh
+docker system prune -a
+``` 

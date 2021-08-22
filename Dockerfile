@@ -1,5 +1,5 @@
 #base image
-FROM python:3.8.6-slim-buster
+FROM python:3.8.5-slim-buster
 
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
