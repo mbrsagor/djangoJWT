@@ -1,7 +1,7 @@
 from rest_framework import permissions
 
 
-class PermissionHelperMixin:
+class PermissionHelperMixin(object):
     def admin_editable_only(self):
         if self.action not in ['list', 'retrieve']:
             return [permissions.IsAdminUser()]
