@@ -1,11 +1,7 @@
-import datetime
 from rest_framework import serializers
 from .models import User, Contact, Note
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from rest_framework_simplejwt.utils import datetime_to_epoch
-
-SUPERUSER_LIFETIME = datetime.timedelta(minutes=90)
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -48,9 +44,7 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
         token['first_name'] = user.first_name
         token['last_name'] = user.last_name
         token['is_active'] = user.is_active
-        if user:
-            token.payload['exp'] = datetime_to_epoch(token.current_time + SUPERUSER_LIFETIME)
-            return token
+        return token
 
 
 # Custom user registration
